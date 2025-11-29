@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>487 Diverse Income Streams</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 10px;
+        }
+        .stream-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .category-header {
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div id="app" class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-10 p-6 bg-white rounded-xl shadow-lg">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-2">The 487 Income Streams Compendium</h1>
+            <p class="text-xl text-gray-600">Explore a comprehensive list for ultimate financial diversification.</p>
+        </header>
+
+        <!-- Search Input -->
+        <div class="mb-8 p-4 bg-white rounded-xl shadow-md sticky top-0 z-10">
+            <input type="text" id="searchInput" placeholder="Search streams (e.g., 'NFT', 'Lending', 'Cleaning')..."
+                   class="w-full p-4 text-lg border-2 border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
+                   oninput="filterStreams(this.value)">
+        </div>
+
+        <!-- Stream List Container -->
+        <div id="streamsContainer" class="space-y-6">
+            <!-- Content will be injected here by JavaScript -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-10 p-4 text-gray-500 text-sm">
+            <p>List compiled by Gemini. Start building your portfolio!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Data structure containing all 487 income streams, organized by category.
+        const allStreamsData = {
+            "I. Digital Products & Assets (85 Streams)": [
+                "1. Selling Digital Templates: Offering high-demand templates (e.g., resume, notion, budget planners, social media kits).",
+                "2. Creating Custom Fonts: Designing and licensing unique font families for commercial use.",
+                "3. Selling Website Themes/Plugins: Developing specialized themes for platforms like WordPress or Shopify.",
+                "4. Licensing Stock Footage/Video: Selling high-quality video clips to stock agencies.",
+                "5. Selling 3D Models/Assets: Creating models for game developers, architects, or animators.",
+                "6. Developing Educational Apps: Creating niche mobile applications focused on learning a specific skill (e.g., coding, language, trivia).",
+                "7. SaaS (Software as a Service) Micro-Tool: Building a very simple, single-feature subscription tool (e.g., a simple URL shortener or SEO calculator).",
+                "8. Selling Audio Loops/Sample Packs: Creating music samples for producers on platforms like Splice or Looperman.",
+                "9. Selling AI Prompts/Templates: Curating and selling effective prompt guides for large language models (LLMs) or image generators.",
+                "10. Selling Code Snippets/Scripts: Offering small, reusable pieces of code for developers.",
+                "11. Selling Design Mock-ups: Providing realistic mock-up files (e.g., t-shirt, billboard, packaging) for graphic designers.",
+                "12. Monetizing an API: Creating an API that performs a specific, useful function and charging for access (e.g., currency conversion, simple data scraping).",
+                "13. Creating Interactive Digital Books (IBooks): Producing books with interactive elements for the Apple Books platform.",
+                "14. Selling White-Label Software: Purchasing the rights to a piece of software and reselling it under your own brand.",
+                "15. Selling Lightroom/Photo Presets: Creating and marketing custom photo filters for professional photographers and hobbyists.",
+                "16. Creating Niche E-book Series: Focusing on deep sub-topics (e.g., advanced VBA macros, quantum finance basics).",
+                "17. Selling Custom Icon Sets/Vector Graphics: Designing proprietary iconographies for corporate or app use.",
+                "18. Developing Micro-Games (Browser/Mobile): Creating simple, addictive games monetized through ads or small purchases.",
+                "19. Licensing Digital Patterns/Textures: Selling repeating patterns for graphic design or textile printing.",
+                "20. Selling High-Resolution Planetary Maps/Data: Creating maps for amateur astronomers or scientists.",
+                "21. Selling Financial Model Templates: Offering complex financial forecasting or valuation models (Excel/Google Sheets).",
+                "22. Developing AR/VR Filters/Lenses: Creating custom interactive filters for social media platforms (Spark AR, Lens Studio).",
+                "23. Selling PLC/SCADA Programming Logic: Providing specialized automation code for industrial systems.",
+                "24. Licensing Technical Illustrations: Selling diagrams and scientific drawings to publishers.",
+                "25. Selling Niche Database Subscriptions: Curating and updating a specific, high-value dataset (e.g., local permit data, obscure material pricing).",
+                "26. Creating and Selling LUTs (Look-Up Tables): Color grading files for videographers and film editors.",
+                "27. Selling CRM Workflow Automation Blueprints: Offering pre-built automation sequences for platforms like HubSpot or Salesforce.",
+                "28. Developing and Selling Slack/Discord Bots: Creating utility bots for specific community functions.",
+                "29. Selling Generative Art Algorithms: Licensing the code that generates unique digital artwork.",
+                "30. Monetizing a Private Search Engine (Niche): Building a search tool that indexes a highly specific vertical.",
+                "31. Selling Digital Sticker Packs (Messaging): Creating custom assets for Telegram, WhatsApp, etc.",
+                "32. Licensing Music Background Tracks: Selling royalty-free music beds for presentations or videos.",
+                "33. Selling Presentation Templates (Keynote/PowerPoint): Focusing on professional, industry-specific slide decks.",
+                "34. Creating Customized Digital Planners (Hyperlinked): Detailed, dated planners for tablet apps like GoodNotes.",
+                "35. Selling Custom WordPress Block/Widget Kits: Developing front-end UI components.",
+                "36. Licensing Educational Animations: Selling short, conceptual animations to educational content creators.",
+                "37. Developing White-Label E-commerce Tools: Creating generic tools that other store owners can brand and sell.",
+                "38. Selling UI/UX Design System Files (Figma/Sketch): Providing complete design component libraries.",
+                "39. Monetizing a Niche Data Visualization Library: Creating and charging for access to a unique charting library (e.g., D3.js wrappers).",
+                "40. Selling Machine Learning Model Weights: Offering pre-trained models for specific tasks (e.g., sentiment analysis in a niche language).",
+                "41. Licensing Holographic/Projection Assets: Selling content designed specifically for unconventional displays.",
+                "42. Selling Digital Escape Room Puzzles: Creating downloadable files for team-building or educational use.",
+                "43. Developing and Licensing Browser Extensions: Creating tools that solve a specific user problem online.",
+                "44. Selling High-End Retouching Action Sets (Photoshop): Automated workflows for specific photography styles.",
+                "45. Selling Resume Screening/Parsing Software: A micro-SaaS tool for recruiters.",
+                "46. Licensing Infographic Templates (Data Storytelling): Specialized formats for complex data.",
+                "47. Creating Custom VTT/VTuber Assets: Selling digital models and accessories for virtual streamers.",
+                "48. Selling Financial Data Feeds (Historical): Offering curated, back-tested data to quantitative traders.",
+                "49. Developing Custom Wallpaper/Background Packs: High-quality imagery for desktop and mobile devices.",
+                "50. Selling Legal Document Templates (Niche): Contracts, waivers, or agreements for specific industries.",
+                "51. Licensing Character Design Sheets: Selling blueprints for mascots or game characters.",
+                "52. Developing and Selling Interactive eBooks for Kids: Content using web technologies (HTML, CSS, JS).",
+                "53. Selling Custom Keyboard Layouts/Macros: Offering productivity hacks for professionals (e.g., video editors).",
+                "54. Monetizing a Digital Curatorial Service: Charging for access to a curated feed of niche industry news or research.",
+                "55. Selling Digital Art NFTs (Non-Fungible Tokens): Developing collectible digital assets.",
+                "56. Selling Niche Digital Collectibles/Trading Cards (Non-NFT): Limited edition art or data files.",
+                "57. Developing a Niche Digital Dictionary/Thesaurus: A language tool for a specific industry (e.g., petrochemicals).",
+                "58. Selling Custom Color Palettes/Gradient Maps: Files for designers and artists.",
+                "59. Licensing Digital Sound Effects (Foley): Providing specific sound clips for film or game development.",
+                "60. Selling Game Server Hosting Configurations: Optimized files and guides for popular multiplayer games.",
+                "61. Creating Custom Desktop/Mobile Themes: Selling complete interface redesign packages.",
+                "62. Selling Data Scraping Scripts: Offering tools to extract data from publicly available web sources.",
+                "63. Developing and Licensing E-learning SCORM Packages: Ready-to-use course content for corporate LMS.",
+                "64. Selling Automated Report Generators: Tools that take raw data and output formatted reports.",
+                "65. Licensing Abstract Generative Art: Selling procedural art for commercial background use.",
+                "66. Selling Custom Discord/Telegram Emojis: Designing unique emoticons for specific groups.",
+                "67. Developing AI-Powered Content Rephrasers (Niche): Micro-tool specific to legal or medical text.",
+                "68. Selling Custom 3D Printer Slicing Profiles: Optimized settings for specific printers and materials.",
+                "69. Licensing Public Domain Data/Image Collections: Curating and selling organized collections of free-use data.",
+                "70. Selling Niche SaaS Integrations/Connectors: Tools that link two specific software platforms.",
+                "71. Developing Custom Website Calculators/Widgets: Embeddable tools for pricing, BMI, mortgage, etc.",
+                "72. Selling Digital Sheet Music (Niche Arrangements): Providing complex or unusual musical scores.",
+                "73. Creating Custom MIDI Drum Tracks/Patterns: Offering pre-programmed drum grooves for music producers.",
+                "74. Selling Data Cleansing Scripts: Automated tools to standardize and clean large datasets.",
+                "75. Developing and Selling Educational Game Assets: Art and code specific to learning games.",
+                "76. Selling Custom Digital Signage Templates: Ready-to-use content for commercial displays.",
+                "77. Licensing Text-to-Speech Voice Profiles (Synthetic): Selling access to a unique digital voice.",
+                "78. Selling High-Fidelity 3D Scans of Objects: Models created via photogrammetry for artists.",
+                "79. Developing Custom Smartwatch Faces/Complications: Digital designs for wearables.",
+                "80. Selling Custom Virtual Meeting Backgrounds: High-quality branded or artistic backgrounds.",
+                "81. Licensing AI Training Data Sets (Annotated): Curated data for training specialized AI models.",
+                "82. Selling Cryptocurrency Wallet Tracking Templates: Spreadsheets or dashboards for tax/portfolio management.",
+                "83. Developing Custom Gamification Frameworks: Code and strategy guides for engagement.",
+                "84. Licensing Interactive Web Components: Selling reusable, complex UI components (e.g., custom sliders, charts).",
+                "85. Selling Niche Automation Recipes (Zapier/Make): Pre-built workflow integrations for business processes."
+            ],
+            "II. High-Value Expertise & Service-Based Income (85 Streams)": [
+                "86. Niche Virtual Assistant (VA): Specializing in complex tasks like CRM management or advanced data analysis.",
+                "87. Fractional CMO/CTO: Providing high-level, part-time executive leadership to small businesses.",
+                "88. Ghostwriting for Executives: Writing articles, speeches, or social media content for senior leaders.",
+                "89. Grant Writing Specialist: Focusing exclusively on writing successful grant proposals for non-profits or startups.",
+                "90. Online Tutoring (Specialized): Teaching highly specific, high-demand skills (e.g., specific programming languages, advanced calculus).",
+                "91. Personalized Research Services: Conducting deep research reports for clients (investors, students, authors).",
+                "92. Corporate Training (Soft Skills): Offering workshops on leadership, communication, or emotional intelligence.",
+                "93. Technical Documentation Writing: Creating user manuals, API docs, or process guides for tech companies.",
+                "94. Professional Voiceover Work (Audiobooks/Ads): Recording voice tracks for commercial clients.",
+                "95. Event Planning Consulting: Offering consultation and coordination for corporate retreats or specialized events.",
+                "96. LinkedIn Profile Optimization: Helping professionals optimize their profiles for career advancement.",
+                "97. Podcast Editing & Production: Providing full production services for corporate or professional podcasts.",
+                "98. Cybersecurity Auditing (Small Biz): Offering basic penetration testing and security reviews for local companies.",
+                "99. Sustainability Consulting: Advising businesses on reducing their carbon footprint or achieving environmental certification.",
+                "100. Code Review Services: Offering expert review and optimization feedback on existing software codebases.",
+                "101. Expert Witness Testimony: Consulting in legal cases related to your professional expertise (e.g., software patents, engineering failure).",
+                "102. Retirement Planning Consulting (Niche): Focusing only on early retirement (FIRE) or high-net-worth individuals.",
+                "103. Niche Bookkeeping/Accounting: Specializing in complex accounting for specific industries (e.g., e-commerce inventory, crypto).",
+                "104. Business Process Mapping: Creating detailed workflow diagrams and optimization plans for companies.",
+                "105. Executive Resume/CV Writing: High-end service for C-suite and senior management candidates.",
+                "106. Specialized Translation Services: Offering technical, legal, or medical translation.",
+                "107. Sales Funnel Optimization Consulting: Advising businesses on improving conversion rates in their sales pipelines.",
+                "108. Fractional General Counsel: Providing part-time legal oversight to startups.",
+                "109. Digital Accessibility Auditing: Ensuring websites and apps meet ADA/WCAG compliance standards.",
+                "110. Custom Data Analysis/Modeling: Building predictive models or dashboards for clients (e.g., R, Python).",
+                "111. Academic Peer Review Services: Offering editing and feedback for scientific papers prior to journal submission.",
+                "112. Public Speaking/Keynote Addresses: Charging fees for motivational or expert talks at conferences.",
+                "113. Media Crisis Management Consulting: Advising individuals or companies during public relations emergencies.",
+                "114. Custom E-commerce Store Setup: Building complete, ready-to-launch stores on platforms like Shopify or BigCommerce.",
+                "115. Personalized Nutrition/Fitness Coaching (Specific Goal): Focusing on marathon training, contest prep, or recovery.",
+                "116. Software Prototyping Services: Rapidly building clickable prototypes for new app ideas.",
+                "117. Internal Communications Strategy: Consulting on improving communication flow within large organizations.",
+                "118. Personal Styling/Wardrobe Consulting (Virtual): Advising clients on fashion and professional attire remotely.",
+                "119. Career Transition Coaching (Industry Specific): Helping professionals move into high-growth sectors (e.g., moving from finance to tech).",
+                "120. Technical SEO Audits: Deep dives into website infrastructure and site speed optimization.",
+                "121. Contract Negotiation Coaching: Training professionals on how to secure better employment contracts or vendor agreements.",
+                "122. Product Naming/Brand Linguistics: Specializing in creating effective and legally safe names for products.",
+                "123. Compliance Consulting (GDPR, HIPAA, etc.): Advising on regulatory requirements for data handling.",
+                "124. Remote Technical Support for Specific Software: Offering paid support for a niche enterprise software package.",
+                "125. Lead Generation via Targeted Cold Outreach: Executing personalized email or LinkedIn campaigns for clients.",
+                "126. API Integration Services: Connecting various business software systems for clients.",
+                "127. Personalized Cybersecurity Training: Training small teams on phishing, password management, and security best practices.",
+                "128. Digital Funeral/Estate Planning: Organizing and managing digital accounts and assets for clients after passing.",
+                "129. Ethical Hacking/Bug Bounty Hunting: Getting paid by companies to find vulnerabilities in their software.",
+                "130. Subscription Management Service: Auditing a client's recurring subscriptions and canceling unused ones for a percentage fee.",
+                "131. Personal Tech Triage/Setup: Helping elderly or non-technical individuals set up and troubleshoot home technology.",
+                "132. Local Marketing Management: Handling Google Business Profile, Yelp, and local review responses for small local businesses.",
+                "133. Specialized Resume Redaction/Anonymization: Preparing documents for blinded review processes.",
+                "134. Custom Database Design/Normalization: Building efficient database structures for organizations.",
+                "135. Small Business Credit Card Strategy Consulting: Advising on maximizing rewards and optimizing spending for small businesses.",
+                "136. Niche Industry Regulatory Tracking: Providing paid alerts and summaries of new regulations in specific sectors (e.g., drone law).",
+                "137. Customer Service Script Writing: Developing highly optimized, empathetic responses for customer support teams.",
+                "138. Emotional Intelligence Coaching for Leaders: Specialized coaching on interpersonal skills in the workplace.",
+                "139. Public Relations for Startups (Seed Stage): Focused PR efforts on early funding rounds and product launches.",
+                "140. Affinity Group/Alumni Association Management: Running operations and fundraising for specialized groups.",
+                "141. Creating Custom Chatbot Flows: Designing interactive customer service or sales bots.",
+                "142. Technical Interview Coaching (Specific Role): Preparing candidates for high-level interviews (e.g., Data Scientist, DevOps).",
+                "143. Escrow Service (Niche): Acting as a neutral third party for transactions in a specific high-value market (e.g., domain names, collectible cars).",
+                "144. Web Performance Optimization Consulting: Focusing solely on improving page load speeds and Core Web Vitals.",
+                "145. Scientific Illustration/Medical Art: Creating detailed illustrations for textbooks, journals, or patient education.",
+                "146. Workshop Facilitation (Non-Corporate): Running public workshops on creative skills (e.g., breadmaking, wood carving).",
+                "147. Personalized Gift Sourcing/Shopping: Finding and managing the purchase of unique, thoughtful gifts for wealthy clients.",
+                "148. Data Entry & Cleanup Automation: Using software to automate repetitive data tasks for small companies.",
+                "149. Digital Asset Organization/Curation: Organizing large photo libraries or document archives for clients.",
+                "150. Speech and Accent Coaching (Professional): Helping non-native speakers refine their accent for professional environments.",
+                "151. Niche Event Speaker Booking Agent: Booking and managing speakers who specialize in a very specific topic.",
+                "152. Specialized Financial Education for Retirees: Teaching investment basics or tax strategies to senior citizens.",
+                "153. Online Course Launch Management: Handling the technical setup, marketing, and delivery for expert instructors.",
+                "154. Local Government Contract Bidding Assistance: Helping small businesses prepare complex bids for local contracts.",
+                "155. Design Thinking Facilitation: Leading teams through creative problem-solving workshops.",
+                "156. Subscription Box Curation Consulting: Advising new subscription box owners on supplier sourcing and logistics.",
+                "157. Personalized Travel Itinerary Design: Creating highly detailed and unique travel plans for niche travelers (e.g., archaeological sites).",
+                "158. Software License Management Consulting: Helping businesses optimize and manage their software subscriptions to save costs.",
+                "159. Ethical Sourcing Auditing: Reviewing supply chains for ethical labor and sustainability practices.",
+                "160. Custom API Documentation Generation: Using tools like Swagger/OpenAPI to generate clear developer documentation.",
+                "161. Financial Literacy Coaching (Debt Repayment Focus): Specialized guidance for managing and eliminating consumer debt.",
+                "162. Intellectual Property (IP) Strategy Consulting: Advising creators on trademark, copyright, and patent protection.",
+                "163. Personalized Language Immersion Coaching: Intensive one-on-one sessions for rapid language acquisition.",
+                "164. Technical Writing for AI/ML Models: Documenting the inputs, outputs, and limitations of complex models.",
+                "165. Family Office Technology Consulting: Managing IT infrastructure and security for high-net-worth families.",
+                "166. Micro-Advertising Campaign Management (Local): Running highly targeted, small-budget ad campaigns for single locations.",
+                "167. Accessibility Remediation Services: Fixing existing digital content to meet accessibility standards.",
+                "168. Personalized Wine/Spirits Curation: Advising private collectors on cellar building and acquisition.",
+                "169. Sales Pitch Deck Creation: Designing compelling visual presentations for fundraising or sales meetings.",
+                "170. Fractional Chief of Staff: Providing high-level administrative and strategic support to busy executives."
+            ],
+            "III. E-commerce, Physical Goods, & Content (90 Streams)": [
+                "171. Selling Merch via Print-on-Demand: Creating branded apparel or accessories related to your content niche.",
+                "172. Affiliate Marketing (Specific Product Review): Focusing reviews on one specific, high-ticket product or service.",
+                "173. Exclusive Content Subscription (Patreon/Substack): Offering bonus materials, early access, or private communities.",
+                "174. Selling Ad Space on a Niche Newsletter: Running a highly specific email list and charging for sponsored spots.",
+                "175. Licensing Photos/Art (High-end): Selling rights to photographic work for commercial advertising.",
+                "176. YouTube Super Chats/Super Stickers: Monetizing live streams through viewer contributions.",
+                "177. Selling a Branded Cookbook/Recipe Ebook: Leveraging a food blog or channel following.",
+                "178. Webinars/Masterclasses (Paid): Offering live, high-value training sessions for a fee.",
+                "179. Creating Educational Quizzes/Assessments: Charging for access to certified knowledge tests.",
+                "180. Brand Ambassador/Sponsored Posts: Working directly with brands for social media promotions.",
+                "181. Selling Niche Stickers/Magnets: Creating small, physical products based on content inside the community.",
+                "182. Setting up a Paywall for Archived Content: Charging for access to older, valuable content.",
+                "183. Creating Branded Emojis or Sticker Packs: Designing digital assets for messaging apps.",
+                "184. Selling Niche Data/Trends Reports: Providing curated information to industry professionals.",
+                "185. Crowdfunding/Donations (Continuous): Using platforms like Buy Me A Coffee or Ko-Fi for audience support.",
+                "186. FBA (Fulfillment by Amazon) Private Label: Creating and sourcing your own brand product to sell via Amazon's infrastructure.",
+                "187. Rental of Specialized Equipment: Renting out high-cost, niche equipment (e.g., professional cameras, construction tools, party tents).",
+                "188. Selling Custom DIY/Craft Kits: Creating boxes with all the materials and instructions for a craft project.",
+                "189. Upcycling/Refurbishing Furniture: Buying, restoring, and reselling vintage or used furniture.",
+                "190. Subscription Box Service (Niche): Curating a monthly box for a very specific hobby (e.g., fly fishing, artisanal coffee).",
+                "191. Creating a Local Food/Produce Box: Delivering farm-to-table boxes within a limited geographical area.",
+                "192. Selling Niche Health/Beauty Formulations: Creating and selling small-batch skincare or supplement products.",
+                "193. Selling Personalized Laser-Engraved Items: Offering custom engraving services on wood, metal, or glass.",
+                "194. Dropshipping (High-Ticket Items): Focusing on expensive items (e.g., patio furniture, commercial kitchen equipment) where profit margins are large.",
+                "195. Selling Digital Downloads for Physical Products (e.g., CNC Files): Selling files that allow buyers to produce a physical product themselves using specialized machines.",
+                "196. Retail Arbitrage (Targeted): Buying clearance items from specific stores and reselling them quickly online.",
+                "197. Selling Locally Sourced Goods Online: Focusing on items unique to your region (e.g., regional spices, local art).",
+                "198. Creating and Selling Specialized Pet Products: Focusing on gear for a specific pet type or breed.",
+                "199. Selling Bulk/Wholesale Goods to Small Businesses: Acting as a middleman for hard-to-source bulk items.",
+                "200. Car/Vehicle Flipping: Buying, making minor repairs, and quickly reselling vehicles for profit.",
+                "201. Selling Niche T-Shirt Designs (TeePublic/Redbubble): Focusing on specific micro-fandoms or inside jokes.",
+                "202. Creating and Selling Specialized Tools (3D Printed): Manufacturing and selling unique small tools or adapters.",
+                "203. Selling Homemade Candles/Soaps (Local Markets): Focusing on natural ingredients and unique scents.",
+                "204. Operating a Mobile Coffee/Snack Cart: Selling high-margin items at business parks or event locations.",
+                "205. Selling Custom Keyboard Keycaps: Manufacturing or sourcing specialized caps for mechanical keyboards.",
+                "206. Selling Refurbished Electronics (Specific Type): Specializing in vintage game consoles or audio equipment.",
+                "207. Creating and Selling Gardening/Seed Starter Kits: Focused on rare, heirloom, or specific regional plants.",
+                "208. Scrap Metal Salvage & Sales: Collecting and selling scrap from demolition or clean-up projects.",
+                "209. Selling Custom Decals/Vinyl Stickers (Bulk): Providing branding elements for small businesses' vehicles or storefronts.",
+                "210. Curating and Selling Vintage Clothing Boxes: Personalized collections based on style and size profiles.",
+                "211. Selling Custom Wigs/Hair Extensions: High-end, tailored human hair products.",
+                "212. Monetizing a Private Label Supplement Line: Creating and selling protein powders or vitamins under your own brand.",
+                "213. Selling Niche Parts for Classic Cars/Motorcycles: Manufacturing or sourcing rare restoration components.",
+                "214. Creating and Selling Art Prints (Limited Edition): High-quality prints of original digital or physical art.",
+                "215. Selling Personalized Home Organization Labels/Tags: Custom vinyl or printed labels for pantry/closet organization.",
+                "216. Selling Custom-Blended Tea/Spice Mixes: Unique food product lines sold online and locally.",
+                "217. Affiliate Sales via a Shoppable Video Platform (e.g., YouTube Shorts): Direct product links in short-form content.",
+                "218. Selling Advertising on Product Packaging/Inserts: Charging other brands to include flyers in your shipments.",
+                "219. Developing and Selling Niche Board Games/Card Games: Creating original tabletop games via crowdfunding.",
+                "220. Selling Handmade Leather Goods: Small, high-quality items like wallets, belts, or passport holders.",
+                "221. Operating a Mobile Car Detailing Service: Premium detailing done at the customer's location.",
+                "222. Selling Rare Books/First Editions: Sourcing and selling collectible literature.",
+                "223. Creating Custom Pet Portraits (Physical or Digital): Commissioned art of pets.",
+                "224. Selling Niche Tool Kits (e.g., Locksmithing, Electronics Repair): Pre-assembled kits for specialized tasks.",
+                "225. Dropshipping from Domestic Suppliers (Fast Shipping): Focusing on speed and reliability.",
+                "226. Selling Custom Phone Cases (High-margin): Specialized materials or unique designs.",
+                "227. Creating and Selling Instructional DVDs/Blu-rays: For audiences that prefer physical media (e.g., fitness, crafts).",
+                "228. Selling Personalized Pet Food/Treats: Custom formulations based on pet health needs.",
+                "229. Monetizing a Paywalled Online Magazine/Journal: Providing high-quality, long-form content behind a subscription.",
+                "230. Selling Ad Space on a High-Traffic Blog Footer: Dedicated advertising slots for relevant businesses.",
+                "231. Operating a Pop-Up Shop/Booth at Fairs: Selling physical goods seasonally or at events.",
+                "232. Creating and Selling Terrariums/Indoor Gardens: Specialized glass ecosystems.",
+                "233. Selling Hand-Painted Shoes/Apparel: Customization services for footwear.",
+                "234. Selling Used Industrial Equipment: Buying and reselling machinery (e.g., used CNC machines, forkllifts).",
+                "235. Creating and Selling Digital Assets with Physical Unlockables: Combining NFT or digital art with a physical product.",
+                "236. Selling Niche Home Brewing/Winemaking Kits: Specialized equipment and ingredients.",
+                "237. Monetizing a Paid Q&A/Advice Column: Charging subscribers to ask expert questions.",
+                "238. Selling Custom 3D-Printed Figurines (Commissioned): Miniature models based on clients' requests.",
+                "239. Creating and Selling Hand-Bound Journals/Books: Artisanal paper goods.",
+                "240. Selling Niche Cleaning/Restoration Products: Specialized products for specific materials (e.g., antique wood, leather).",
+                "241. Monetizing a Private Beta Testing Group: Charging companies to access a panel of early users for feedback.",
+                "242. Selling Licensed Digital Goods on Roblox/Metaverse Platforms: Creating and selling assets within virtual worlds.",
+                "243. Creating and Selling Custom Fishing Lures/Tackles: Specialized gear for specific fish or locations.",
+                "244. Selling High-End Personalized Stationery/Invites: Custom wedding or corporate invitation packages.",
+                "245. Monetizing a Private Slack/Discord Channel for Job Listings: Charging recruiters for access to a talent pool.",
+                "246. Selling Customized Car License Plate Frames/Accessories: Specialty vehicle add-ons.",
+                "247. Creating and Selling Niche Photography Props/Backdrops: Items used by professional photographers.",
+                "248. Selling Digital Files for Embroidery Machines: Patterns and designs for automated sewing.",
+                "249. Dropshipping from AliExpress (Highly Vetted Products): Focusing on product quality and speed despite source.",
+                "250. Selling Reusable Shopping Bags (Branded/Artistic): High-quality, design-focused tote bags.",
+                "251. Monetizing a Free E-book with Affiliate Links Embedded: Passive income via content links.",
+                "252. Selling Customized Phone Repair Kits: Specialized tools and replacement parts for specific phone models.",
+                "253. Creating and Selling Educational Flashcards (Niche): Physical cards for medical, language, or technical study.",
+                "254. Selling Advertising Space on a YouTube Community Tab: Charging for promotional posts directed at subscribers.",
+                "255. Selling Niche Apparel Patches/Badges: Embroidered or enamel patches for collectors.",
+                "256. Creating and Selling Custom Home Scents/Diffusers: Unique, high-end room fragrances.",
+                "257. Monetizing a Private RSS Feed Aggregator: Charging for a consolidated feed of niche information.",
+                "258. Selling Personalized Trophies/Awards: Custom engraving services for local teams or businesses.",
+                "259. Creating and Selling Digital Wallpapers/Backgrounds: High-resolution image packs for commercial use.",
+                "260. Selling Used Photography/Videography Equipment: Buying, testing, and reselling used gear."
+            ],
+            "IV. Real Estate & Physical Space (90 Streams)": [
+                "261. Short-Term Rental Arbitrage: Leasing a property long-term and sub-leasing it short-term (with permission).",
+                "262. Renting Storage Space: Renting out unused portions of your garage, basement, or land for storage.",
+                "263. Renting Parking Spots: Offering dedicated spots in high-density areas or near venues.",
+                "264. Land Lease for Solar Farms/Billboards: Leasing unused acreage for commercial installations.",
+                "265. Selling Mobile Home Park Lots: Developing and managing lots in mobile home communities.",
+                "266. Hard Money Lending (Real Estate): Providing short-term, high-interest loans to property developers.",
+                "267. Fix-and-Hold Rental (Multi-Family): Investing in small apartment buildings for long-term cash flow.",
+                "268. Vacation Rental Management: Managing and servicing other people's vacation rental properties for a fee.",
+                "269. Rent-to-Own Financing: Structuring home sales with an option to purchase.",
+                "270. Buying/Selling Tax Liens/Deeds: Acquiring property or earning interest through government auctions.",
+                "271. Renting out a Commercial Kitchen Space: Leasing certified kitchen space to food truck operators or small caterers.",
+                "272. Owning a Shared Workspace (Co-working): Operating a flexible office space.",
+                "273. Renting Event Space: Leasing a unique location (e.g., barn, loft, large yard) for parties or photoshoots.",
+                "274. Private Mortgage Note Investing: Buying promissory notes from lenders and collecting the payments.",
+                "275. Syndication (Real Estate): Pooling capital from multiple investors to buy large assets and earning fees for management.",
+                "276. Renting out Specific Rooms for Filming/Photoshoots: Offering aesthetically unique rooms by the hour to media producers.",
+                "277. Leasing Land for Agricultural Use (Specific Crops): Renting acreage to farmers for high-value niche crops.",
+                "278. Renting Garage Space for Classic Car Storage: Climate-controlled, secure storage for specialty vehicles.",
+                "279. Owning and Operating an RV Park/Glamping Site: Rental income from specialized recreational property.",
+                "280. Leasing Rooftop Space for Telecom Antennas: Receiving rent from cell providers for equipment placement.",
+                "281. Property Flipping (Wholesaling): Contracting to buy a property and selling the contract before closing.",
+                "282. Short-Term Rental Co-Hosting: Managing the entire operation of an Airbnb for a percentage of the revenue.",
+                "283. Owning and Leasing Self-Storage Facilities: Renting out storage units.",
+                "284. Renting Driveway Space to Food Trucks: Leasing prime, visible space for vendor operations.",
+                "285. Leasing Pop-Up Retail Space (Temporary): Offering short-term leases for seasonal or new businesses.",
+                "286. Vending Machine Route Ownership: Purchasing and managing a fleet of automated vending machines in high-traffic areas.",
+                "287. ATM Route Ownership: Placing and managing a network of ATM machines, earning fees per transaction.",
+                "288. Leasing Industrial Land for Freight Truck Parking: Offering secure overnight or long-term parking for commercial vehicles.",
+                "289. Owning and Leasing Billboard Structures: Renting out advertising space on physical billboards.",
+                "290. Renting Out Workshop/Studio Space (Specialized): Leasing space tailored for specific crafts (e.g., pottery, welding).",
+                "291. Mobile Laundry/Dry Cleaning Service: Picking up, cleaning, and delivering laundry for busy professionals.",
+                "292. Micro-Warehousing/Local Fulfillment: Offering small-scale storage and shipping services for local e-commerce.",
+                "293. Leasing Property to Government Agencies: Securing long-term, stable contracts with municipal or state entities.",
+                "294. Renting out Excess Farmland for Hunting Leases: Charging annual fees for recreational hunting rights.",
+                "295. Acquiring and Renting Out Airport Hangar Space: Leasing private storage for aircraft.",
+                "296. Providing Property Management for Student Housing: Specialized management focusing on academic renters.",
+                "297. Renting out Boat Slips/Dock Space: Leasing space at a private marina or waterfront property.",
+                "298. Leasing Commercial Space for Ghost Kitchens: Offering delivery-only kitchen facilities.",
+                "299. Owning and Leasing Tiny Homes/Modular Units: Renting small, easily transportable housing units.",
+                "300. Renting Land for Community Gardens/Allotments: Leasing small plots to local residents.",
+                "301. Acquiring and Leasing Out Water Rights: Charging for the use of water access or extraction permits.",
+                "302. Renting Home Gym Equipment: Leasing out high-cost fitness machines locally.",
+                "303. Leasing Space for Car Washes/Detailing Bays: Renting bays to independent operators.",
+                "304. Renting out Home Equipment (Specialized): Offering tools like wood chippers, earth movers, or pressure washers.",
+                "305. Owning and Leasing Commercial Greenhouses: Renting specialized agricultural facilities.",
+                "306. Providing Specialized Property Maintenance (Niche): Focusing on solar panel cleaning, chimney sweeping, or specific equipment repair.",
+                "307. Renting Space for Server/Data Equipment (Co-location): Hosting client servers in a secure, climate-controlled location.",
+                "308. Property Tax Appeals Consulting: Helping homeowners and businesses reduce their property tax assessments for a fee.",
+                "309. Renting out Private Mailboxes/Virtual Office Addresses: Offering professional mailing addresses.",
+                "310. Leasing Out Land for Camping/RV Stays (Hipcamp model): Monetizing private land for travelers.",
+                "311. Owning and Leasing Event Furniture/Decor: Renting chairs, tables, and unique decorations for parties.",
+                "312. Renting a Home for House-Sitting/Pet-Sitting Services: Offering services where you live in the client's home.",
+                "313. Leasing Space for Hydroponic/Vertical Farms: Renting warehouse space tailored for indoor farming.",
+                "314. Renting out Sporting Fields/Courts (Private): Leasing private athletic facilities for leagues or teams.",
+                "315. Owning and Leasing Shipping Containers: Renting containers for storage or transport.",
+                "316. Renting Temporary Event Power Generators: Leasing commercial-grade power equipment for large events.",
+                "317. Leasing Out Vacant Land for Temporary Art Installations: Charging artists or promoters for use.",
+                "318. Real Estate Photography/Videography Services: Offering professional media for property listings.",
+                "319. Renting out Heavy Construction Equipment (Excavators, etc.): Leasing high-value machinery.",
+                "320. Leasing Commercial Roof Space for Green Roofs/Farming: Renting space to urban agriculture projects.",
+                "321. Renting out Private Pools/Hot Tubs by the Hour: Pool-sharing service for private use.",
+                "322. Providing Winterization/De-winterization Services: Seasonal maintenance for homes and cabins.",
+                "323. Owning and Leasing Marquee Letters/Lighting: Renting large, light-up letters for events.",
+                "324. Renting Temporary Portable Toilets/Restroom Trailers: Leasing facilities for events or construction sites.",
+                "325. Leasing Out Private Roads/Lots for Driver Training: Renting space for driving schools or defensive driving courses.",
+                "326. Renting a Private Recording Studio: Leasing specialized acoustic space to musicians and podcasters.",
+                "327. Property Staging and Interior Design for Listings: Decorating homes to maximize sale price.",
+                "328. Leasing Out Unused Office Cubicles (Micro-rental): Renting individual desk space in a quiet environment.",
+                "329. Renting out Professional Cleaning Equipment: Leasing specialized carpet cleaners, floor buffers, etc.",
+                "330. Mobile Welding/Fabrication Services: Taking specialized equipment to client sites for repairs.",
+                "331. Leasing Private Land for Cell Tower Development: Negotiating and securing cell tower contracts.",
+                "332. Renting out Specialty Vehicles (e.g., Party Buses, Luxury Vans): Transportation and experience rental.",
+                "333. Owning and Leasing Commercial Laundry Equipment: Renting large machines to businesses.",
+                "334. Renting Portable Photo Booths: Leasing automated photo-taking stations for events.",
+                "335. Leasing Residential Property to Corporate Tenants: Securing long-term leases from companies for employee housing.",
+                "336. Renting out Specialized Audio/Visual Equipment: Leasing projectors, PA systems, or lighting rigs.",
+                "337. Acquiring and Leasing Mineral Rights: Earning royalties from resource extraction on property.",
+                "338. Providing Landscape Design/Installation: Full-service garden and yard renovation.",
+                "339. Renting Private Museum/Gallery Space: Leasing high-security display space to private collectors.",
+                "340. Owning and Leasing Modular Classrooms/Offices: Portable buildings for temporary use.",
+                "341. Renting Private Tennis/Basketball Courts: Leasing dedicated sports facilities.",
+                "342. Providing Gutter Cleaning/Repair Services: Specialized home maintenance.",
+                "343. Leasing Private Land for Beekeeping/Apiaries: Charging rent to beekeepers.",
+                "344. Renting Custom Backdrops/Sets for E-commerce Photography: Specialized staging for product shots.",
+                "345. Owning and Leasing Tents/Canopies (Large Scale): Event infrastructure rentals.",
+                "346. Renting Private Screening Room/Home Theater: Leasing a high-end viewing space by the hour.",
+                "347. Leasing Industrial Space for Robotics Testing: Renting secure, empty space for R&D.",
+                "348. Providing Driveway Sealing/Maintenance: Specialized coating services for pavement.",
+                "349. Renting Out Heavy-Duty Tools (e.g., Chainsaws, Jackhammers): Leasing specialized DIY equipment.",
+                "350. Acquiring and Leasing Out Water Sport Equipment: Renting kayaks, paddleboards, or jet skis seasonally."
+            ],
+            "V. Financial & Capital Investments (90 Streams)": [
+                "351. Peer-to-Peer Lending: Lending capital to individuals or businesses through intermediary platforms.",
+                "352. Dividend Stocks (REITs): Investing specifically in Real Estate Investment Trusts for reliable distributions.",
+                "353. Covered Call Strategy: Selling call options on stocks you already own to collect premium income.",
+                "354. Bond Laddering: Investing in staggered, fixed-income bonds to ensure regular maturity payouts.",
+                "355. High-Yield Savings Accounts/CDs: Securing liquid assets in accounts that pay competitive interest.",
+                "356. Cryptocurrency Staking: Earning rewards for locking up crypto to support a blockchain network.",
+                "357. Tokenized Real Estate: Investing in fractional ownership of properties via blockchain tokens.",
+                "358. Investing in Private Debt/Microloans: Providing short-term funding to small businesses outside traditional banks.",
+                "359. Royalties from Patents/Inventions: Licensing intellectual property for commercial use.",
+                "360. Index Fund Distributions: Quarterly or annual payouts from broad market index funds.",
+                "361. Selling Life Insurance Policies (Viatic/Life Settlements): Investing in the policies of terminally ill individuals (high risk/regulation).",
+                "362. Investing in Precious Metals (Storage Fees): Lending metals to institutions for a fee.",
+                "363. Securities Lending: Allowing brokerage to lend your fully paid-for stock shares for a fee.",
+                "364. Investing in Small Business Equity Crowdfunding: Taking small stakes in private businesses via platforms.",
+                "365. Litigation Finance Investing: Funding lawsuits in exchange for a portion of the settlement.",
+                "366. Master Limited Partnership (MLP) Distributions: Investing in energy or infrastructure projects for high yield.",
+                "367. Selling Put Options (Cash-Secured Puts): Collecting premium for agreeing to buy a stock at a lower price.",
+                "368. Cryptocurrency Yield Farming/Liquidity Pools: Earning fees and rewards for providing digital asset liquidity.",
+                "369. Investing in Royalties (Music, Books, Film): Purchasing fractional or full rights to future IP revenue.",
+                "370. Collectibles/Fine Art Investing (Fractional): Buying shares of high-value physical assets (e.g., platforms like Masterworks).",
+                "371. Farmland Investing (Non-Active): Investing in agricultural land through a REIT or fractional ownership platform.",
+                "372. Angel Investing (Micro-Seed Rounds): Providing small amounts of capital to very early-stage startups.",
+                "373. Tax-Lien Certificates Investing: Earning high interest from local government certificates.",
+                "374. Investing in Structured Settlements: Buying the rights to a series of future payment streams at a discount.",
+                "375. Private Equity Fund Investments (Closed-end): Committing capital to funds that invest in non-public companies.",
+                "376. Rental Income from Aircraft/Aircraft Parts: Investing in leasing parts to airlines.",
+                "377. Venture Debt Investing: Providing loans to venture-backed companies that prefer non-dilutive financing.",
+                "378. Carbon Credit Trading: Buying and selling environmental commodity credits (requires specialized knowledge).",
+                "379. Investing in Water Rights/Infrastructure: Securing rights to water delivery systems or sources.",
+                "380. Foreign Currency Carry Trade: Borrowing in a low-interest currency and lending in a high-interest one.",
+                "381. Investing in Peer-to-Peer Invoice Factoring: Buying a company's accounts receivable at a discount.",
+                "382. Digital Land/Metaverse Real Estate Rentals: Buying and renting out virtual property.",
+                "383. Small Business Acquisition (Owner Financed): Buying a cash-flowing business where the seller finances the purchase.",
+                "384. Investing in Collectible Wine/Whiskey (Resale/Storage Fees): Buying rare bottles and potentially charging storage fees.",
+                "385. Earning Interest from Decentralized Autonomous Organization (DAO) Treasuries: Participating in governance and earning native token yield.",
+                "386. Selling High-Value Insurance Policies (Brokerage Fee): Earning commission on whole life or specialized business insurance.",
+                "387. Investing in Public Domain Assets: Acquiring and republishing content whose copyright has expired.",
+                "388. Earning Interest on Stablecoins (Fixed Term): Lending crypto stablecoins for a guaranteed yield.",
+                "389. Private Lending to Individuals (Secured): Offering loans secured by personal assets like jewelry or vehicles.",
+                "390. Investing in Equipment Leasing Funds: Funds that purchase equipment (e.g., medical, construction) and lease it out.",
+                "391. Selling Niche Websites/Flipping Digital Assets: Buying, improving, and selling content websites or e-commerce stores.",
+                "392. Investing in Timberland/Forestry: Earning revenue from timber sales and land appreciation.",
+                "393. Earning Brokerage Referrals (B2B): Getting paid a commission for referring high-value clients to financial institutions.",
+                "394. Investing in Movie/Film Production Tax Credits: Buying transferable tax credits issued to film producers.",
+                "395. High-Frequency Trading Strategies (Automated): Running algorithmic trading bots for market opportunities.",
+                "396. Investing in Vintage Watch Flipping: Buying, authenticating, and reselling luxury watches.",
+                "397. Earning Interest from Decentralized Exchange (DEX) Trading Fees: Providing liquidity and earning a cut of transaction fees.",
+                "398. Selling Credit Repair Services (Fee-Based): Helping individuals legally improve their credit scores.",
+                "399. Private Equity Secondaries: Buying existing limited partnership stakes in PE funds from original investors.",
+                "400. Investing in Weather Derivatives: Financial instruments based on weather events (highly complex).",
+                "401. Selling Foreign Debt/Sovereign Bonds: Investing in debt issued by foreign governments.",
+                "420. Selling Gold/Silver Mining Stocks (Junior Miners): High-risk, high-reward resource investments.",
+                "402. Earning Dividends from Mutual Funds/ETFs (Non-Index): Receiving distributions from actively managed funds.",
+                "403. Micro-Investing in Fine Art Prints (Limited Edition): Buying and holding prints for potential appreciation.",
+                "404. Funding Small-Scale Import/Export Deals (Trade Finance): Providing capital for specific international shipments.",
+                "405. Investing in Water Bottling Rights/Plants: Earning revenue from the sale of bottled water.",
+                "406. Selling and Servicing Warranties (Specific Products): Earning premiums on extended service plans.",
+                "407. Earning Income from Digital Wallet Features (Interest/Swap Fees): Yield from embedded financial tools.",
+                "408. Investing in Art Gallery Ownership (Silent Partner): Providing capital and earning a share of sales/commissions.",
+                "409. Trading Credit Default Swaps (CDS): Complex derivatives based on the default risk of debt.",
+                "410. Selling Insurance Lead Generation: Generating verified leads for insurance agents.",
+                "411. Investing in Litigation Judgment Collection: Buying legal judgments at a discount and collecting the full amount.",
+                "412. Earning Revenue from Sponsored Investment Newsletters: Charging financial firms to place ads.",
+                "413. Investing in Private Energy Projects (Solar/Wind Farms): Providing capital for renewable infrastructure.",
+                "414. Selling Domain Names (Niche Flipping): Buying and selling domains relevant to emerging trends.",
+                "415. Earning Interest on Margin Lending: Lending money to other traders for leveraged positions.",
+                "416. Investing in Specialty Agricultural Products (e.g., Saffron, Truffles): High-value, niche commodities.",
+                "417. Selling Credit Card Processing Services: Earning a cut of transaction fees from businesses.",
+                "418. Earning Fees from Automated Tax Preparation Software: Selling niche tax tools for specific situations.",
+                "419. Investing in Hedge Fund Side Pockets: Illiquid, high-risk investments reserved for specific opportunities.",
+                "421. Earning Interest from Central Bank Digital Currencies (CBDCs): Future interest-bearing accounts tied to digital currencies.",
+                "422. Investing in Private Water Utilities: Taking stakes in local water provision companies.",
+                "423. Selling Financial Data APIs (Custom): Building specialized data feeds for hedge funds.",
+                "424. Earning Referral Fees for Business Loans: Connecting small businesses with private lenders.",
+                "425. Investing in Private Label Credit Card Programs: Partnering to issue store-branded credit cards.",
+                "426. Selling Insurance Claims Processing Software: Micro-SaaS tool for automated claims handling.",
+                "427. Earning Income from High-Interest Treasury Inflation-Protected Securities (TIPS): Government bonds adjusted for inflation.",
+                "428. Investing in Aircraft Engine Leasing: Specialized leasing of expensive aerospace components.",
+                "429. Selling Tax Planning Consultations (Specific Event Focus): Advising on tax implications of crypto, stock options, etc.",
+                "430. Earning Fees from White-Label Payment Gateways: Providing payment processing under a client's brand.",
+                "431. Investing in Film Distribution Rights (Regional): Purchasing rights to distribute a movie in a specific territory.",
+                "432. Selling Data Brokerage Services (Niche): Collecting and selling specific consumer data ethically.",
+                "433. Earning Commission on Precious Metal Sales (Brokerage): Facilitating physical gold/silver transactions.",
+                "434. Investing in Private Cannabis/Hemp Cultivation: Providing capital to licensed growers.",
+                "435. Selling Foreign Exchange Trading Signals: Charging subscribers for alerts on currency trades.",
+                "436. Earning Income from Decentralized Social Media Tokens: Rewards for providing content or compute power on Web3 platforms.",
+                "437. Investing in Commercial Gym Equipment Leasing: Providing funding for gym assets.",
+                "438. Selling Financial Planning Software Subscriptions (Niche): Tools focused on specific demographics (e.g., expatriates).",
+                "439. Earning Fees from Corporate Treasury Management Consulting: Advising companies on optimizing their cash flow and reserves.",
+                "440. Investing in Alternative Energy Sources (Geothermal, Tidal): Providing capital to emerging power projects."
+            ],
+            "VI. Micro-Monetization & Task Automation (47 Streams)": [
+                "441. Affiliate Marketing on Comparison Shopping Engines: Earning a cut when users click from your site to a retailer.",
+                "442. Monetizing a Loyalty/Rewards Program: Creating a program for local businesses and charging a monthly fee.",
+                "443. Operating a Paid Forum/Niche Community: Charging a subscription for access to an exclusive community centered on a high-value topic.",
+                "444. Running an Online Contest/Giveaway Service: Managing the logistics and promotion of contests for other businesses.",
+                "445. Providing Professional Organizing Services: Helping individuals or businesses declutter and systematize spaces.",
+                "446. Local Tour Service (Specialized): Offering historical walking tours or culinary tours.",
+                "447. Writing and Selling Hymns/Jingles: Licensing original musical pieces to churches or commercial entities.",
+                "448. Selling Used Textbooks (Niche): Focusing on hard-to-find academic or technical manuals.",
+                "449. Completing Micro-Tasks (Crowdsourcing Platforms): Performing small data verification or tagging tasks (e.g., Amazon Mechanical Turk).",
+                "450. Running a Data Annotation Service: Labeling images, text, or video for AI training purposes.",
+                "451. Monetizing Personal Data/Insights: Selling anonymized data about your consumer habits (via apps/panels).",
+                "452. Participating in Paid Surveys/Research Studies (High-Value): Focusing on specialized clinical trials or professional interviews.",
+                "453. Renting Computer Processing Power (Distributed Computing): Leasing CPU/GPU time for research or mining.",
+                "454. Selling Ad Space on Personal Vehicles: Displaying local business advertisements on your car.",
+                "455. Running a Specialized Errand Service: Offering pickup/delivery for niche items (e.g., legal documents, medical supplies).",
+                "456. Selling Niche Data Lists (Self-Compiled): Creating and selling lists of specific contacts (e.g., conference speakers, niche investors).",
+                "457. Operating a Local Lost-and-Found Service: Charging a fee to reunite owners with found items.",
+                "458. Providing Personalized Wake-Up/Reminder Calls: Charging a small fee for guaranteed personal reminders.",
+                "459. Selling Custom Ringtone/Notification Sounds: Designing and selling unique audio alerts.",
+                "460. Monetizing a Public Wi-Fi Hotspot (Ad-supported): Providing free Wi-Fi in a high-traffic area with mandatory ad viewing.",
+                "461. Selling Custom Photo/Video Editing Presets for Social Media: Offering specific looks for Instagram/TikTok.",
+                "462. Providing Furniture Assembly Service: Specializing in complex flat-pack furniture setup.",
+                "463. Operating a Small-Scale Shredding Service (Confidential): Offering secure document destruction for small offices.",
+                "464. Selling Excess Home-Generated Power (Microgrid/Solar): Selling surplus electricity back to the utility.",
+                "465. Renting out Closet Space for Seasonal Storage: Providing off-site storage for out-of-season clothing.",
+                "466. Running a Mobile Tool Sharpening Service: Sharpening knives, garden tools, and saw blades.",
+                "467. Selling Local Weather/Microclimate Data: Offering hyper-specific data to farmers or event planners.",
+                "468. Providing Home Winterization Services (Insulation, Sealing): Offering specialized energy-saving repairs.",
+                "469. Running an Automated Price Monitoring Service: Charging e-commerce clients to track competitor pricing.",
+                "470. Selling Customized Road Trip/Vacation Audio Guides: Geographically-triggered audio content.",
+                "471. Providing Drone Photography/Inspection Services: Offering aerial views for construction or real estate.",
+                "472. Selling Customized Computer Startup/Shutdown Scripts: Automating routine maintenance for businesses.",
+                "473. Operating a Local Package Acceptance/Holding Service: Charging a fee to securely receive packages for travelers.",
+                "474. Monetizing a 'Waiting in Line' Service: Charging an hourly rate to stand in line for high-demand items or services.",
+                "475. Selling Specialized Cleaning Services (e.g., Air Ducts, Vents): Deep cleaning of specific infrastructure.",
+                "476. Providing Social Media Moderation (24/7): Managing comments and preventing spam for large accounts.",
+                "477. Selling Niche Tutorial Videos on YouTube (Non-Ad Sense): Monetizing through external product links/sponsorships.",
+                "478. Operating a Paid Newsletter Referral Program: Earning a bonus for recruiting new paid subscribers to a newsletter.",
+                "479. Providing Event Set-up/Tear-down Labor: Offering muscle for quickly assembling and dismantling event infrastructure.",
+                "480. Selling Customized Home Safety/Security Audits: Advising homeowners on improving physical security.",
+                "481. Operating a Local E-waste Collection Service: Charging businesses to properly dispose of old electronics.",
+                "482. Providing Digital Detox Coaching: Helping individuals manage screen time and technology dependency.",
+                "483. Selling Custom Furniture Plans/Blueprints: Detailed designs for DIY woodworkers.",
+                "484. Operating a Local Bartering/Trade Network (Paid Membership): Charging a fee to connect members for services/goods exchange.",
+                "485. Providing Professional Gift Wrapping Service: Seasonal service for retail stores or individual clients.",
+                "486. Selling Customized Financial Goal Tracking Dashboards: Specialized personal finance spreadsheets/software.",
+                "487. Monetizing a Private Beta Testing Group (Paid Access): Charging users for the privilege of testing new software and providing feedback."
+            ]
+        };
+
+        const streamsContainer = document.getElementById('streamsContainer');
+
+        // Function to render the full list or filtered list
+        function renderStreams(data, searchTerm = '') {
+            streamsContainer.innerHTML = '';
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
+            let foundCount = 0;
+
+            for (const category in data) {
+                const filteredStreams = data[category].filter(stream =>
+                    stream.toLowerCase().includes(lowerCaseSearchTerm)
+                );
+
+                if (filteredStreams.length > 0) {
+                    foundCount += filteredStreams.length;
+
+                    // Category Card (Collapsible)
+                    const categoryCard = document.createElement('div');
+                    categoryCard.className = `category-card bg-white p-6 rounded-xl shadow-lg`;
+
+                    // Category Header (Clickable for collapse/expand)
+                    const header = document.createElement('div');
+                    // Add 'pointer-events-none' if a search term is active to prevent accidental collapse when trying to view filtered results
+                    const isSearching = searchTerm.length > 0;
+                    header.className = `category-header flex justify-between items-center cursor-pointer border-b pb-4 mb-4 ${isSearching ? 'border-indigo-400' : 'border-gray-200'} transition-all duration-300`;
+                    header.innerHTML = `
+                        <h2 class="text-xl sm:text-2xl font-bold text-indigo-700">${category.split('(')[0].trim()} <span class="text-sm font-medium text-gray-500">(${filteredStreams.length} found)</span></h2>
+                        <svg class="w-6 h-6 text-indigo-600 transform transition-transform ${isSearching ? 'rotate-180' : ''}" data-toggle="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    `;
+                    // Only attach click handler if not actively searching, forcing open view when searching
+                    if (!isSearching) {
+                        header.onclick = () => toggleCollapse(categoryCard.querySelector('[data-content]'), header.querySelector('[data-toggle="icon"]'));
+                    }
+                    categoryCard.appendChild(header);
+
+                    // Stream List Content
+                    const content = document.createElement('ul');
+                    // Show expanded if searching, otherwise collapsed
+                    content.className = `space-y-3 ${isSearching ? '' : 'hidden'}`;
+                    content.setAttribute('data-content', true);
+
+                    filteredStreams.forEach(stream => {
+                        const listItem = document.createElement('li');
+                        // Highlight the search term if present
+                        let displayStream = stream;
+                        if (searchTerm) {
+                            const regex = new RegExp(`(${searchTerm})`, 'gi');
+                            displayStream = stream.replace(regex, '<span class="bg-yellow-200 font-semibold rounded px-1">$1</span>');
+                        }
+
+                        listItem.className = 'stream-item p-3 bg-indigo-50 text-gray-800 rounded-lg transition duration-200 ease-in-out cursor-default text-base leading-relaxed';
+                        listItem.innerHTML = displayStream;
+                        content.appendChild(listItem);
+                    });
+
+                    categoryCard.appendChild(content);
+                    streamsContainer.appendChild(categoryCard);
+                }
+            }
+
+            // Show message if no streams are found
+            if (searchTerm && foundCount === 0) {
+                 streamsContainer.innerHTML = `
+                    <div class="text-center p-12 bg-white rounded-xl shadow-lg mt-8">
+                        <svg class="w-16 h-16 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172A4 4 0 0112 11.586v-1.586m0 6a4 4 0 100-8 4 4 0 00-4 4 4 4 0 004 4z"></path></svg>
+                        <h3 class="text-xl font-semibold text-gray-700">No matching income streams found.</h3>
+                        <p class="text-gray-500">Try a different keyword or check your spelling. Remember there are 487 unique ideas!</p>
+                    </div>
+                `;
+            } else if (!searchTerm) {
+                // If not searching, display the total count in the header for clarity
+                const totalStreams = Object.values(data).flat().length;
+                document.querySelector('p.text-xl').innerHTML = `Explore a comprehensive list of <span class="font-semibold text-indigo-700">${totalStreams}</span> ideas for financial diversification.`;
+            }
+        }
+
+        // Toggle visibility of content and rotate the arrow icon
+        function toggleCollapse(contentElement, iconElement) {
+            contentElement.classList.toggle('hidden');
+            iconElement.classList.toggle('rotate-180');
+        }
+
+        // Filter function triggered by input
+        function filterStreams(searchTerm) {
+            renderStreams(allStreamsData, searchTerm.trim());
+        }
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStreams(allStreamsData);
+        });
+    </script>
+</body>
+</html>
