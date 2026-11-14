@@ -568,6 +568,7 @@ const saved = new Set();
 const compared = new Set();
 try { (JSON.parse(localStorage.getItem('incomeExplorerSaved') || '[]')).forEach(x => saved.add(Number(x))); } catch(e) {}
 let activeCategory = '';
+let savedOnly = false;
 let currentDetail = null;
 let page = 1;
 const pageSize = 24;
@@ -602,7 +603,7 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function persist(){try{localStorage.setItem('incomeExplorerSaved',JSON.stringify([...saved]));}catch(e){}}
 function getFiltered(){
  const q=$('search').value.trim().toLowerCase(), work=$('workFilter').value, model=$('modelFilter').value, capital=$('capitalFilter').value, risk=$('riskFilter').value;
- let items=all.filter(x=>(!activeCategory||x.category===activeCategory)&&(!q||(x.name+' '+x.description+' '+x.category+' '+x.raw).toLowerCase().includes(q))&&(!work||x.work===work)&&(!model||x.model===model)&&(!capital||x.capital===capital)&&(!risk||x.risk===risk));
+ let items=all.filter(x=>(!savedOnly||saved.has(x.id))&&(!activeCategory||x.category===activeCategory)&&(!q||(x.name+' '+x.description+' '+x.category+' '+x.raw).toLowerCase().includes(q))&&(!work||x.work===work)&&(!model||x.model===model)&&(!capital||x.capital===capital)&&(!risk||x.risk===risk));
  const sort=$('sort').value;
  if(sort==='name')items.sort((a,b)=>a.name.localeCompare(b.name));
  if(sort==='capital'){const rank={'Low':0,'Moderate':1,'High':2,'Capital intensive':3};items.sort((a,b)=>rank[a.capital]-rank[b.capital]||a.number-b.number);}
@@ -689,8 +690,8 @@ function openCompare(){
 }
 ['search','workFilter','modelFilter','capitalFilter','riskFilter','sort'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',()=>{page=1;render();}));
 $('clearSearch').addEventListener('click',()=>{$('search').value='';page=1;render();});
-$('resetAll').addEventListener('click',()=>{$('search').value='';['workFilter','modelFilter','capitalFilter','riskFilter'].forEach(id=>$(id).value='');$('sort').value='number';activeCategory='';page=1;render();});
-$('savedJump').addEventListener('click',()=>{activeCategory='';$('search').value='';render();$('listHeading').textContent='Your saved shortlist';const items=all.filter(x=>saved.has(x.id));$('cards').innerHTML=items.length?items.map(cardHTML).join(''):'<div class="empty">Your shortlist is empty. Save ideas using the ☆ Save control.</div>';window.scrollTo({top:300,behavior:'smooth'});});
+$('resetAll').addEventListener('click',()=>{savedOnly=false;$('search').value='';['workFilter','modelFilter','capitalFilter','riskFilter'].forEach(id=>$(id).value='');$('sort').value='number';activeCategory='';page=1;render();});
+$('savedJump').addEventListener('click',()=>{activeCategory='';savedOnly=true;$('search').value='';page=1;render();$('listHeading').textContent='Your saved shortlist';window.scrollTo({top:300,behavior:'smooth'});});
 $('detailSave').addEventListener('click',()=>{if(currentDetail)toggleSave(currentDetail.id);if(currentDetail)$('detailSave').textContent=saved.has(currentDetail.id)?'Remove from shortlist':'Save to shortlist';});
 $('detailCompare').addEventListener('click',()=>{if(currentDetail)toggleCompare(currentDetail.id);if(currentDetail)$('detailCompare').textContent=compared.has(currentDetail.id)?'Remove from comparison':'Add to comparison';});
 $('openCompare').addEventListener('click',openCompare);$('compareNow').addEventListener('click',openCompare);
