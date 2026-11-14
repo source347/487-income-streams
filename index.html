@@ -639,7 +639,7 @@ function renderSaved(){
 }
 function toggleSave(id){saved.has(id)?saved.delete(id):saved.add(id);persist();render();}
 function renderCompareBar(){
- $('compareSlots').textContent=compared.size+' / 3;$('openCompare').disabled=compared.size===0;
+ $('compareSlots').textContent=compared.size+' / 3';$('openCompare').disabled=compared.size===0;
  $('compareBar').classList.toggle('show',compared.size>0);
  $('compareBarText').textContent=compared.size+' idea'+(compared.size===1?'':'s')+' selected';
 }
